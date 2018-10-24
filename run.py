@@ -25,9 +25,9 @@ def gen_read_write(R=10):
         t0=time.time()
         y=pd.read_csv('y.csv')
         read[r]=time.time()-t0
-    print('average data generation time: %.1f s' % np.mean(gen))
-    print('average data write time: %.1f s' % np.mean(write))
-    print('average data read time: %.1f s' % np.mean(read))
+    print('average data generation time: %.1f seconds' % np.mean(gen))
+    print('average data write time: %.1f seconds' % np.mean(write))
+    print('average data read time: %.1f seconds' % np.mean(read))
 
 def big_calc(i):
     x_norm=np.mean(np.random.randn(1000,50,10),axis=2)
@@ -40,7 +40,7 @@ def single(R=10):
         t0=time.time()
         result=list(map(big_calc,range(1000)))
         single_time[r]=time.time()-t0
-    print('average computing time (single-process): %.1f s' % np.mean(single_time))
+    print('average computing time (single-process): %.1f seconds' % np.mean(single_time))
 
 def multi(R=10):
     multi_time=np.zeros(R)
@@ -49,8 +49,8 @@ def multi(R=10):
         pool=multiprocessing.Pool()
         result=pool.map(big_calc,range(1000))
         multi_time[r]=time.time()-t0
-    print('# processes used: %d' % multiprocessing.cpu_count())
-    print('average computing time (%d-process): %.1f s' % (multiprocessing.cpu_count(),np.mean(multi_time)))
+    # print('# processes used: %d' % multiprocessing.cpu_count())
+    print('average computing time (%d-process): %.1f seconds' % (multiprocessing.cpu_count(),np.mean(multi_time)))
 
 if (__name__=='__main__'):
     gen_read_write()
